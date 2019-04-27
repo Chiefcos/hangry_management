@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Response attempt </title>
+</head>
+
+<body>
+
+</body>
+<form id="search-form">
+    <input id="ingredient">
+    <button type="submit">Search</button><br>
+    Calories<br>
+    <input type="number" class="calories">max calories per serving<br>
+    Time (required) <br>
+    <input type="number" class="time">max minutes to spend on this<br>
+    Diet (required)<br> 
+    <input type="checkbox" class="diet" value="high-protein">High Protein <br>
+    <input type="checkbox" class="diet" value="low-carb">Low Carb<br>
+    Health<br>
+    <input type="checkbox" class="health" value="peanut-free">Peanut-Free<br>
+    <input type="checkbox" class="health" value="gluten-free">NOGluten-Free<br>
+    <input type="checkbox" class="health" value="dairy-free">NODairy-Free<br>
+    <input type="checkbox" class="health" value="keto-friendly">NOKeto-Friendly<br>
+    <input type="checkbox" class="health" value="kosher">NOKosher<br>
+    <input type="checkbox" class="health" value="vegan">Vegan<br>
+    <!-- will add more health checkboxes -->
+    Cuisine Type<br>
+    <input type="checkbox" class="cuisine" value="chinese">Chinese<br>
+    <input type="checkbox" class="cuisine" value="indian">Indian<br>    
+    NONE OF THE Dish Type WORK<br>
+    <input type="checkbox" class="dish-type" value="breakfast">Breakfast<br>
+    <input type="checkbox" class="dish-type" value="lunch">Lunch<br>
+    <input type="checkbox" class="dish-type" value="dinner">Dinner<br>
+    <input type="checkbox" class="dish-type" value="dessert">Dessert<br>
+    Exclude<br>
+    <input type="text" class="excluded"> Exclude these ingredients <br>
+</form>
+
+<h1> Results </h1>
+<div class="recipe-image"></div>
+<div class="recipe-title"></div>
+<div class="ingredients"></div>
+<div class="servings"></div>
+<div class="calories"></div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+//Add option to choose results per page
+
+
+    $("#search-form").on("submit", function (event) {
+        event.preventDefault();
+        var searchIngredient = $("#ingredient").val()
+        var maxCalories = $(".calories").val()
+        //diet can only have one checked option//high-fiber breaks it.
+        //diet needs to have a value, if undefined, creates error.  Need to do, if/else
+        var diet = "&diet=" + $(".diet:checked").val()
+        //if no value entered in time, breaks
+        var time = "&time=" + $(".time").val()
+
+        var healthArray = [];
+        var healthString = "";
+        $.each($(".health:checked"), function() {
+            healthArray.push($(this).val());
+            healthString = "&health=" + healthArray.join("&health=")
+        }) 
+
+        var cuisineArray=[];
+        var cuisineString = "";
+        $.each($(".cuisine:checked"), function() {
+            cuisineArray.push($(this).val());
+            cuisineString = "&cuisine=" + cuisineArray.join("&cuisine=")
+        }) 
+
+        //no dishTypes work
+        var dishTypeArray=[];
+        var dishTypeString = "";
+        $.each($(".dish-type:checked"), function() {
+            dishTypeArray.push($(this).val());
+            dishTypeString = "&dishType=" + dishTypeArray.join("&dishType=")
+        }) 
+
+        //excluded can have multiple responses separated by a space
+        var excludedArray=[];
+        var excludedString = "";
+        $.each($(".excluded"), function() {
+            excludedArray = ($(this).val()).split(" ");
+            excludedString = "&excluded=" + excludedArray.join("&excluded=")
+        }) 
+
+        var queryURL = "https://api.edamam.com/search?q=" + searchIngredient + 
+            "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + diet + time
+            + healthString + cuisineString + excludedString;
+
+        // console.log(queryURL);
+
+        // url: "https://api.edamam.com/search?q=chicken&app_id=e01003f3&app_key=44207489780c508b3d8adeaa5c1feb0f&from=0&to=3&calories=100-500&diet=high-protein&health=peanut-free&dishType=dinner",
+        // url: "https://api.edamam.com/search?q=chicken&app_id=e01003f3&app_key=44207489780c508b3d8adeaa5c1feb0f&from=0&to=3&calories=100-500&diet=high-protein&health=peanut-free&dishType=dessert",
+        // url: "https://api.edamam.com/search?q=" + searchIngredient + 
+        // "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + "&diet=" + diet + 
+        // time + healthString + cuisineString,
+
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            
+            $(".recipe-image").html("<img src=" + response.hits[0].recipe.image + ">");
+            $(".recipe-title").text("recipe title: " + response.hits[0].recipe.label);
+            $(".ingredients").text("ingredients: " + response.hits[0].recipe.ingredients[0].text);
+            $(".servings").text("servings: " + response.hits[0].recipe.yield);
+            var servings = response.hits[0].recipe.yield;
+            var totalCalories = response.hits[0].recipe.calories;
+            var caloriesPerServing = Math.round(totalCalories/servings);
+            $(".calories").text("calories per serving: " + caloriesPerServing);
+
+
+            for (var i = 0; i < response.length; i++) {
+                $(".recipe-title").html(response.hits[i].recipe.label);
+
+            }
+            
+
+
+
+
+        });
+    })
+
+    
+    
+        
+
+
+
+</script>
+
+
+
+</html>
