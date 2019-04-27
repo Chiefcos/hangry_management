@@ -39,7 +39,7 @@ $(".counter").on("click", function() {
   clickCounter++;
 
   //   access the database and save the data for click counter
-  database.ref().set({
+  database.ref().push({
     clickCount: clickCounter
   });
 });
@@ -108,7 +108,7 @@ function stopVideo() {
   player.stopVideo();
 }
 var videoId;
-var videoQuery = "chicken";
+var videoQuery = "garlic beef";
 var queryURL =
   "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
   videoQuery +
@@ -119,7 +119,7 @@ $.ajax({
   method: "GET"
 }).then(function(response) {
   console.log(response);
-  videoId = response.items[2].id.videoId;
+  videoId = response.items[0].id.videoId;
   // 3. This function creates an <iframe> (and YouTube player)
   //    after the API code downloads.
 });
