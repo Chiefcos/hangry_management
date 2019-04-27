@@ -1,3 +1,88 @@
+// Firebase
+var config = {
+  apiKey: "AIzaSyCEy9bC6uS5eeI8oijSHGQ-Anw0iT_2hLc",
+  authDomain: "myawesomeproject-10537.firebaseapp.com",
+  databaseURL: "https://myawesomeproject-10537.firebaseio.com",
+  projectId: "myawesomeproject-10537",
+  storageBucket: "myawesomeproject-10537.appspot.com",
+  messagingSenderId: "96513436362"
+};
+firebase.initializeApp(config);
+
+// Variables
+// ================================================================================
+
+// Get a reference to the database service
+var database = firebase.database();
+
+// Initializing our click count at 0
+var clickCounter = 0;
+var recipeCount = 0;
+
+var recipeIngredients = {
+  ingredients: ["spinach", "lemon", "chicken", "broth"]
+};
+// Functions
+// ================================================================================
+
+$("#bookmark").on("click", function() {
+  var response = database.ref().push({
+    recipeList: recipeIngredients
+  });
+  console.log("i am response", response);
+  var dataNameRecipe = response.path.n;
+  console.log("Important Data" + dataNameRecipe);
+});
+// On Click
+$(".counter").on("click", function() {
+  // Add 1 to clickCounter
+  clickCounter++;
+
+  //   access the database and save the data for click counter
+  database.ref().set({
+    clickCount: clickCounter
+  });
+});
+
+// the bookmarking click event
+$("#dropDownMenu").on("click", function() {
+  console.log("im being clicked");
+  recipeCount++;
+  console.log(recipeCount);
+  var recipeList = $("<ul>");
+  var recipeLink = $("<a>").attr("href", "#");
+  var recipeItem = $("<li>");
+  recipeItem.text(" Recipe #" + recipeCount);
+
+  recipeLink.append(recipeItem);
+  recipeList.append(recipeLink);
+  $("#test").append(recipeList);
+
+  var data = document.getElementById("test");
+  console.log("im the data", data);
+});
+// database.ref().on(
+//   "value",
+//   function(snapshot) {
+//     // Then we console.log the value of snapshot
+//     console.log(snapshot.val());
+
+//     // Update the clickCounter variable with data from the database.
+//     clickCounter = snapshot.val().clickCount;
+
+//     // Then we change the html associated with the number.
+//     $(".counter").text(snapshot.val().clickCount);
+
+//     // If there is an error that Firebase runs into -- it will be stored in the "errorObject"
+//     // Again we could have named errorObject anything we wanted.
+//   },
+//   function(errorObject) {
+//     // In case of error this will print the error
+//     console.log("The read failed: " + errorObject.code);
+//   }
+// );
+// Youtube API Pull and IFrame Player
+
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement("script");
 
@@ -23,7 +108,7 @@ function stopVideo() {
   player.stopVideo();
 }
 var videoId;
-var videoQuery = "lime chicken";
+var videoQuery = "chicken";
 var queryURL =
   "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
   videoQuery +

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -9,6 +9,7 @@
       crossorigin="anonymous"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -17,10 +18,10 @@
   </head>
   <body>
     <!-- This is going to be the link for the video result so we can measure the amount of times it has been clicked -->
-    <!-- <button class="counter btn btn-primary">Click me!</button> -->
+    <button class="counter btn btn-primary">Click me!</button>
 
     <!-- This is going to be the button that will save the recipy for bookmarking -->
-    <!-- <button id="bookmark" class="btn btn-primary">Bookmark this recipy</button> -->
+    <button id="bookmark" class="btn btn-primary">Bookmark this recipy</button>
 
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div class="container">
@@ -28,6 +29,14 @@
         <div id="player" class="col-md-6 border"></div>
       </div>
     </div>
+
+    <button id="dropDownMenu">Drop Down Menu</button>
+
+    <div class=" recipelist col-md-2 border">
+      <div id="test"></div>
+    </div>
+
+    <h2 id="test2">blabla</h2>
 
     <script src="./app.js"></script>
   </body>
