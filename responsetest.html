@@ -16,9 +16,9 @@
     <button type="submit">Search</button><br>
     Calories<br>
     <input type="number" class="calories">max calories per serving<br>
-    Time (required) <br>
+    Time  <br>
     <input type="number" class="time">max minutes to spend on this<br>
-    Diet (required)<br> 
+    Diet (Choose One)<br> 
     <input type="checkbox" class="diet" value="high-protein">High Protein <br>
     <input type="checkbox" class="diet" value="low-carb">Low Carb<br>
     Health<br>
@@ -60,9 +60,18 @@
         var maxCalories = $(".calories").val()
         //diet can only have one checked option//high-fiber breaks it.
         //diet needs to have a value, if undefined, creates error.  Need to do, if/else
-        var diet = "&diet=" + $(".diet:checked").val()
-        //if no value entered in time, breaks
+        var diet = "";
+            if ($(".diet").is(":checked")) {
+                diet = "&diet=" + $(".diet:checked").val();
+            }
+        console.log("diet: " + diet);
+
+
         var time = "&time=" + $(".time").val()
+            if ($(".time").val() === "") {
+                time = ""
+            }
+
 
         var healthArray = [];
         var healthString = "";
@@ -97,40 +106,45 @@
         var queryURL = "https://api.edamam.com/search?q=" + searchIngredient + 
             "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + diet + time
             + healthString + cuisineString + excludedString;
-
-        // console.log(queryURL);
-
-        // url: "https://api.edamam.com/search?q=chicken&app_id=e01003f3&app_key=44207489780c508b3d8adeaa5c1feb0f&from=0&to=3&calories=100-500&diet=high-protein&health=peanut-free&dishType=dinner",
-        // url: "https://api.edamam.com/search?q=chicken&app_id=e01003f3&app_key=44207489780c508b3d8adeaa5c1feb0f&from=0&to=3&calories=100-500&diet=high-protein&health=peanut-free&dishType=dessert",
-        // url: "https://api.edamam.com/search?q=" + searchIngredient + 
-        // "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + "&diet=" + diet + 
-        // time + healthString + cuisineString,
-
+        
+        var recipeTitle;
+        var results;
 
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).then(function (response) {
+        })
+            .then(function(response) {
             console.log(response);
+            console.log("results: " + results)
             
-            $(".recipe-image").html("<img src=" + response.hits[0].recipe.image + ">");
-            $(".recipe-title").text("recipe title: " + response.hits[0].recipe.label);
-            $(".ingredients").text("ingredients: " + response.hits[0].recipe.ingredients[0].text);
-            $(".servings").text("servings: " + response.hits[0].recipe.yield);
-            var servings = response.hits[0].recipe.yield;
-            var totalCalories = response.hits[0].recipe.calories;
-            var caloriesPerServing = Math.round(totalCalories/servings);
-            $(".calories").text("calories per serving: " + caloriesPerServing);
+            for (var i = 0; i < response.hits.length; i++) {
+
+                var recipeImage = response.hits[i].recipe.image;
+                var recipeTitle = response.hits[i].recipe.label;
+                // var ingredients = response.hits[i].recipe.ingredients[0].text;
+                var ingredients = [];
+                    for (j = 0; j < response.hits[i].recipe.ingredients.length; j++) {
+                        ingredients.push(response.hits[i].recipe.ingredients[j].text)
+                        
+                    }
+                    console.log("ingredients: " + ingredients);
+
+                var servings = response.hits[i].recipe.yield;
+                var totalCalories = response.hits[i].recipe.calories;
+                var caloriesPerServing = Math.round(totalCalories/servings);
 
 
-            for (var i = 0; i < response.length; i++) {
-                $(".recipe-title").html(response.hits[i].recipe.label);
+                
+                // $(".recipe-image").html("<img src=" +  + ">");
+                // $(".recipe-title").text("recipe title: " + ;
+                // $(".ingredients").text("ingredients: " + );
+                // $(".servings").text("servings: " +);
+                // $(".calories").text("calories per serving: " + caloriesPerServing);
+                
+                // recipeTitle = response.hits[0].recipe.label;
 
             }
-            
-
-
-
 
         });
     })
