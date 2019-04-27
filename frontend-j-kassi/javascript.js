@@ -16,3 +16,5 @@ $("#list-button").on("click", function {
     $("result-div").attr("list-view", "true");
     $("result-div").attr("width", "100%");
 });
+
+// $("p").css("background-image");
