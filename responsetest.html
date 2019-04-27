@@ -41,7 +41,12 @@
     <input type="text" class="excluded"> Exclude these ingredients <br>
 </form>
 
-
+<h1> Results </h1>
+<div class="recipe-image"></div>
+<div class="recipe-title"></div>
+<div class="ingredients"></div>
+<div class="servings"></div>
+<div class="calories"></div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -58,7 +63,6 @@
         var diet = "&diet=" + $(".diet:checked").val()
         //if no value entered in time, breaks
         var time = "&time=" + $(".time").val()
-
 
         var healthArray = [];
         var healthString = "";
@@ -82,7 +86,6 @@
             dishTypeString = "&dishType=" + dishTypeArray.join("&dishType=")
         }) 
 
-
         //excluded can have multiple responses separated by a space
         var excludedArray=[];
         var excludedString = "";
@@ -95,12 +98,10 @@
             "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + diet + time
             + healthString + cuisineString + excludedString;
 
-        console.log(queryURL);
+        // console.log(queryURL);
+
         // url: "https://api.edamam.com/search?q=chicken&app_id=e01003f3&app_key=44207489780c508b3d8adeaa5c1feb0f&from=0&to=3&calories=100-500&diet=high-protein&health=peanut-free&dishType=dinner",
-            
-
         // url: "https://api.edamam.com/search?q=chicken&app_id=e01003f3&app_key=44207489780c508b3d8adeaa5c1feb0f&from=0&to=3&calories=100-500&diet=high-protein&health=peanut-free&dishType=dessert",
-
         // url: "https://api.edamam.com/search?q=" + searchIngredient + 
         // "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + "&diet=" + diet + 
         // time + healthString + cuisineString,
@@ -110,13 +111,31 @@
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response); 
+            console.log(response);
+            
+            $(".recipe-image").html("<img src=" + response.hits[0].recipe.image + ">");
+            $(".recipe-title").text("recipe title: " + response.hits[0].recipe.label);
+            $(".ingredients").text("ingredients: " + response.hits[0].recipe.ingredients[0].text);
+            $(".servings").text("servings: " + response.hits[0].recipe.yield);
+            var servings = response.hits[0].recipe.yield;
+            var totalCalories = response.hits[0].recipe.calories;
+            var caloriesPerServing = Math.round(totalCalories/servings);
+            $(".calories").text("calories per serving: " + caloriesPerServing);
+
+
+            for (var i = 0; i < response.length; i++) {
+                $(".recipe-title").html(response.hits[i].recipe.label);
+
+            }
+            
+
+
+
+
         });
-
-
     })
 
-
+    
     
         
 
