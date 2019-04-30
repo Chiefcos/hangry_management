@@ -10,8 +10,8 @@
 
 <body>
 
-</body>
 <form id="search-form">
+    Enter one search ingredient
     <input id="ingredient">
     <button type="submit">Search</button><br>
     Calories<br>
@@ -42,121 +42,15 @@
 </form>
 
 <h1> Results </h1>
-<div class="recipe-image"></div>
-<div class="recipe-title"></div>
-<div class="ingredients"></div>
-<div class="servings"></div>
-<div class="calories"></div>
+<div id="recipe-results"></div>
+
+<br>
+Modal placeholder
+<div id="single-recipe"></div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-//Add option to choose results per page
+<script src="/Users/paulinacortez/bootcamp/groupproject/main.js"></script>
 
-
-    $("#search-form").on("submit", function (event) {
-        event.preventDefault();
-        var searchIngredient = $("#ingredient").val()
-        var maxCalories = $(".calories").val()
-        //diet can only have one checked option//high-fiber breaks it.
-        //diet needs to have a value, if undefined, creates error.  Need to do, if/else
-        var diet = "";
-            if ($(".diet").is(":checked")) {
-                diet = "&diet=" + $(".diet:checked").val();
-            }
-        console.log("diet: " + diet);
-
-
-        var time = "&time=" + $(".time").val()
-            if ($(".time").val() === "") {
-                time = ""
-            }
-
-
-        var healthArray = [];
-        var healthString = "";
-        $.each($(".health:checked"), function() {
-            healthArray.push($(this).val());
-            healthString = "&health=" + healthArray.join("&health=")
-        }) 
-
-        var cuisineArray=[];
-        var cuisineString = "";
-        $.each($(".cuisine:checked"), function() {
-            cuisineArray.push($(this).val());
-            cuisineString = "&cuisine=" + cuisineArray.join("&cuisine=")
-        }) 
-
-        //no dishTypes work
-        var dishTypeArray=[];
-        var dishTypeString = "";
-        $.each($(".dish-type:checked"), function() {
-            dishTypeArray.push($(this).val());
-            dishTypeString = "&dishType=" + dishTypeArray.join("&dishType=")
-        }) 
-
-        //excluded can have multiple responses separated by a space
-        var excludedArray=[];
-        var excludedString = "";
-        $.each($(".excluded"), function() {
-            excludedArray = ($(this).val()).split(" ");
-            excludedString = "&excluded=" + excludedArray.join("&excluded=")
-        }) 
-
-        var queryURL = "https://api.edamam.com/search?q=" + searchIngredient + 
-            "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=3&calories=1-" + maxCalories + diet + time
-            + healthString + cuisineString + excludedString;
-        
-        var recipeTitle;
-        var results;
-
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-            .then(function(response) {
-            console.log(response);
-            console.log("results: " + results)
-            
-            for (var i = 0; i < response.hits.length; i++) {
-
-                var recipeImage = response.hits[i].recipe.image;
-                var recipeTitle = response.hits[i].recipe.label;
-                // var ingredients = response.hits[i].recipe.ingredients[0].text;
-                var ingredients = [];
-                    for (j = 0; j < response.hits[i].recipe.ingredients.length; j++) {
-                        ingredients.push(response.hits[i].recipe.ingredients[j].text)
-                        
-                    }
-                    console.log("ingredients: " + ingredients);
-
-                var servings = response.hits[i].recipe.yield;
-                var totalCalories = response.hits[i].recipe.calories;
-                var caloriesPerServing = Math.round(totalCalories/servings);
-
-
-                
-                // $(".recipe-image").html("<img src=" +  + ">");
-                // $(".recipe-title").text("recipe title: " + ;
-                // $(".ingredients").text("ingredients: " + );
-                // $(".servings").text("servings: " +);
-                // $(".calories").text("calories per serving: " + caloriesPerServing);
-                
-                // recipeTitle = response.hits[0].recipe.label;
-
-            }
-
-        });
-    })
-
-    
-    
-        
-
-
-
-</script>
-
-
-
+</body>
 </html>
