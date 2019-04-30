@@ -1,0 +1,36 @@
+#mainNavbar .navbar-brand {
+    color: #FCFDFE;
+    font-size: 2.5rem;
+    font-weight: 100;
+    font-family: "Lato";}
+
+#navbarSupportedContent {
+    color: #FCFDFE;
+    font-size: 1.0rem;
+    font-weight: 100;
+    font-family: "Poppins";
+}
+
+#searchForm {
+	position:absolute;
+    top:40%;
+    font-family: "Poppins";
+}
+
+#advSearchCheckBox {
+    position:absolute;
+    top:50%;
+    margin-top:2%;
+    margin-left:2%;
+    color: #FCFDFE;
+    font-family: "Poppins";
+    font-size: 1.0rem;
+}
+
+
+#bottomNav {
+    color: #FCFDFE;
+    font-size: 1.0rem;
+    font-weight: 100;
+    font-family: "Poppins";
+}
