@@ -59,14 +59,13 @@ $(".search-form").on("submit", function (event) {
     
     console.log("query URL: " + queryURL);
 
-    // need to add a parentheses or bracket here to close??
-
     $.ajax({
         url: queryURL,
         method: "GET"
     })
         .then(function(response) {
         console.log(response);
+        console.log("ajax test");
         // console.log("results: " + results)
         
         for (var i = 0; i < response.hits.length; i++) {
@@ -146,6 +145,7 @@ $(".search-form").on("submit", function (event) {
             recipeDiv.append(displayCaloriesPerServing);
 
             $("#recipe-results").append(recipeDiv);
+            
         };
 
 
