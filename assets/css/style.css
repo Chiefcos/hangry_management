@@ -43,10 +43,12 @@
     margin-right: auto;
     font-family: "Poppins";
     width: 80%;
+
 }
 
 #recipe-results {
     width:100%;
+    background-color: white;
 }
 
 
