@@ -1,32 +1,39 @@
+
 var recipeDiv;
 
 $("#search-form").on("submit", function (event) {
     event.preventDefault();
     $("#recipe-results").html("");
+
     var searchIngredient = $("#ingredient").val();
     var resultsQuantity = $("#results-quantity").val();
+
     var maxCalories = $(".calories").val();
-    //high-fiber breaks it.
+    //?high-fiber breaks it.
     var diet = "";
     if ($(".diet").is(":checked")) {
         diet = "&dietLabels=" + $(".diet:checked").val();
     }
+
     var time = "&time=" + $(".time").val();
     if ($(".time").val() === "") {
         time = ""
     }
+
     var healthArray = [];
     var healthString = "";
     $.each($(".health:checked"), function() {
         healthArray.push($(this).val());
         healthString = "&healthLabels=" + healthArray.join("&healthLabels=")
     }) 
+
     // var cuisineArray=[];
     // var cuisineString = "";
     // $.each($(".cuisine:checked"), function() {
     //     cuisineArray.push($(this).val());
     //     cuisineString = "&cuisine=" + cuisineArray.join("&cuisine=")
     // }) 
+
     //excluded can have multiple responses separated by a space
     var excludedArray=[];
     if ($(".excluded").val() === ""){
@@ -37,7 +44,9 @@ $("#search-form").on("submit", function (event) {
             excludedString = "&excluded=" + excludedArray.join("&excluded=")
         }) 
     }
+
     
+
     var queryURL = "https://api.edamam.com/search?q=" + searchIngredient + 
         "&app_id=df8f013e&app_key=371aa3e4099265f1b0d249cf790f4336&from=0&to=" + resultsQuantity +
          "&calories=1-" + maxCalories + diet + time + healthString + excludedString;
@@ -46,6 +55,7 @@ $("#search-form").on("submit", function (event) {
     var results;
     
     console.log("query URL: " + queryURL);
+
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -60,7 +70,18 @@ $("#search-form").on("submit", function (event) {
                 for (j = 0; j < response.hits[i].recipe.ingredients.length; j++) {
                     ingredients.push(" " + response.hits[i].recipe.ingredients[j].text);  
                 }
-                // console.log("ingredients: " + ingredients);
+            // console.log("ingredients: " + ingredients);
+            // console.log(response.hits[i].recipe.ingredients)
+
+            // var listIngredients = $("<ul></ul>")
+            //     for (n = 0; n < response.hits[i].recipe.ingredients.length; n++) {
+            //         listIngredients.append("<li>" + response.hits[i].recipe.ingredients[n].text);  
+            //     }
+            
+            // console.log("list ingredients: " + listIngredients);
+            
+            // $("#ingredients-test").append(listIngredients);
+
             var servings = response.hits[i].recipe.yield;
             var totalCalories = response.hits[i].recipe.calories;
             var caloriesPerServing = Math.round(totalCalories/servings);
@@ -74,20 +95,29 @@ $("#search-form").on("submit", function (event) {
                     healthLabel.push(" " + response.hits[i].recipe.healthLabels[l]);
                 }
             // console.log("healthLabel: " + healthLabel);
-            var totalNutrients=[];
-                for (m=0; m < response.hits[i].recipe.totalNutrients.length; m++) {
-                    totalNutrients.push("Nutrient: " + response.hits[i].recipe.totalNutrients[m].label);
-                    totalNutrients.push("Qty: " + response.hits[i].recipe.totalNutrients[m].quantity);
-                    totalNutrients.push(" " + response.hits[i].recipe.totalNutrients[m].unit);
-                }
-            // console.log("total Nutrients: " + totalNutrients);
+            var totalNutrients = "";
+
+            for (var m in response.hits[i].recipe.totalNutrients) {
+                totalNutrients += "<p> " + response.hits[i].recipe.totalNutrients[m].label;
+                totalNutrients += " " + Math.round(response.hits[i].recipe.totalNutrients[m].quantity);
+                totalNutrients += " " + response.hits[i].recipe.totalNutrients[m].unit + "</p>";
+                // console.log("m: " + m);
+              }
+            
+
             var recipeYield=response.hits[i].recipe.yield;
             
             var linkToInstructions = response.hits[i].recipe.url;
+
             var recipeDiv = $("<div>");
-            recipeDiv.attr("id", "recipe-click");
+
+            var recipeImage = $("<img>");
+            recipeImage.attr("src", response.hits[i].recipe.image);
+
+            recipeDiv.attr("class", "recipe-click");
             recipeDiv.attr("data-title", recipeTitle);
             recipeDiv.attr("data-ingredients", ingredients);
+            recipeDiv.attr("data-ingredientsData", JSON.stringify(response.hits[i].recipe.ingredients));
             recipeDiv.attr("data-yield", recipeYield);
             recipeDiv.attr("data-caloriesperserv", caloriesPerServing);
             recipeDiv.attr("data-dietLabel", dietLabel);
@@ -95,91 +125,125 @@ $("#search-form").on("submit", function (event) {
             recipeDiv.attr("data-totalNutrients", totalNutrients);
             recipeDiv.attr("data-linkToInstructions", linkToInstructions);
             recipeDiv.attr("data-image", response.hits[i].recipe.image);
-            var recipeImage = $("<img>");
-            recipeImage.attr("src", response.hits[i].recipe.image);
             
+
             var title = $("<p>").text("Title: " + recipeTitle);
-            var listOfIngredients = $("<p>").text("Ingredients: " + ingredients);
+            var arrayOfIngredients = $("<p>").text("Ingredients: " + ingredients);
             var displayCaloriesPerServing = $("<p>").text("Calories per Serving: " + caloriesPerServing);
+
             recipeDiv.append(recipeImage);
             recipeDiv.append(title);
-            recipeDiv.append(listOfIngredients);
+            recipeDiv.append(arrayOfIngredients);
             recipeDiv.append(displayCaloriesPerServing);
+
             $("#recipe-results").append(recipeDiv);
         }
+
+
+
     });
+
     this.reset();
 })
-$(document).on("click", "#recipe-click", function() {
-    //image and total nutrients not working
+
+
+
+$(document).on("click", ".recipe-click", function() {
+    
+    $("#single-recipe").html("");
     var singleRecipeDiv = $("<div>");
+
     var singleRecipeImage = $("<img>");
     singleRecipeImage.attr("src", $(this).attr("data-image"));
+
     var singleRecipeTitle = $("<p>").text("Recipe title: " + $(this).attr("data-title"));
-    var singleRecipeIngredients = $("<p>").text("Recipe Ingredients: " + $(this).attr("data-ingredients"));
+
+    var ingredientList = $("<ul>")
+    var ingredientsArray = JSON.parse($(this).attr("data-ingredientsData"));
+
+     for (i=0; i < ingredientsArray.length; i++) {
+
+        // var addToShoppingList = $("<button>+</button>");
+        // addToShoppingList.text("+");
+        // addToShoppingList.addClass("add-to-shopping-list")
+        var listItem = $("<li id='add-to-shopping'>");
+        listItem.attr("data-ingredientText", ingredientsArray[i].text)
+        listItem.append("<button>+</button>" + ingredientsArray[i].text);
+        
+        // console.log("data-ingredientText" + ingredientsArray[i].text)
+        ingredientList.append(listItem);
+        // ingredientList.append(addToShoppingList);
+        
+     }
+
     var singleRecipeYield = $("<p>").text("This recipe yields " + $(this).attr("data-yield") + " servings");
     var singleRecipeCalPerS = $("<p>").text("Calories per Serving: " + $(this).attr("data-caloriesperserv"));
     var singleRecipeDietLabel = $("<p>").text("Diet Labels: " +  $(this).attr("data-dietLabel"));
     var singleRecipeHealthLabel = $("<p>").text("Health Labels: " + $(this).attr("data-healthLabel"));
-    var singleRecipetotalNutrients = $("<p>").text("Total Nutrients: " + $(this).attr("data-totalNutrients"));
+    var singleRecipetotalNutrients = $("<p>").html("Total Nutrients: " + $(this).attr("data-totalNutrients"));
     var singleRecipeLinkToInstructions = $("<p>").html("<a href=" + $(this).attr("data-linkToInstructions") 
         + " target='_blank'>Link to full instructions</a>");
+
+    // singleRecipeIngredients.attr("id", "click-ingredients");
+    // singleRecipeIngredients.attr("data-ingredientsToFav", ingredientsToFavorite);
+    
     singleRecipeDiv.append(singleRecipeImage);
     singleRecipeDiv.append(singleRecipeTitle);
-    singleRecipeDiv.append(singleRecipeIngredients);
+    singleRecipeDiv.append(ingredientList);
     singleRecipeDiv.append(singleRecipeYield);
     singleRecipeDiv.append(singleRecipeCalPerS);
     singleRecipeDiv.append(singleRecipeDietLabel);
     singleRecipeDiv.append(singleRecipeHealthLabel);
     singleRecipeDiv.append(singleRecipetotalNutrients);
     singleRecipeDiv.append(singleRecipeLinkToInstructions);
+
     $("#single-recipe").append(singleRecipeDiv);
+    // console.log("ingredients to favorite: " + ingredientsToFavorite);
     
-    
-    
-});
+})
 
-// $("#tile-button").on("click", function {
-    // switch the #all-results width and the contents within it
-    
-    // var resultItem = $("<div>");
-    // resultItem.addClass("#all-results");
-    // resultItem.attr("width", "100px");
-    // $("#multi-results").append(resultItem);
-    // switch the attribute class "listview"
-//     $("#all-results").attr("list-view", "false");
-//     $("#all-results").attr("width", "100px");
-//     $("food-photo").css("background-image", "url(https://via.placeholder.com/100)");
-//     $("food-photo").attr("width", "95px");
-// });
+var shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+if (shoppingList === null) {
+    shoppingList = [];
+}
 
-// $("#list-button").on("click", function {
-    // switch the #all-results width and the contents within it
-//     $("#all-results").attr("list-view", "true");
-//     $("#all-results").attr("width", "100%");
-// });
+function renderShoppingList() {
+    $("#shopping-list").empty();
+    for (i = 0; i < shoppingList.length; i++) {
+        var shoppingContainer = $("<figure>");
 
-// $("p").css("background-image");
+        var deleteItem = $("<button>");
+        deleteItem.attr("data-index", i);
+        deleteItem.text("-");
+        deleteItem.addClass("delete");
 
+        shoppingContainer.append(shoppingList[i] + "<br>");
+        shoppingContainer.append(deleteItem);
+        $("#shopping-list").prepend(shoppingContainer);
+    }
+};
 
-$("#fa-search").on("click", function {
-    var userInput = $("#form-control").val();
-    $("#user-input").text(userInput);
-    // JSON.stringify(obj);
-    // $(".recipe-image").html("<img src=" + response.hits[0].recipe.image + ">");
-    // $(".recipe-title").text("recipe title: " + response.hits[0].recipe.label);
+renderShoppingList();
 
-    // $("#all-results").append(oneResult);
-});
+$(document).on("click", "#add-to-shopping", function() {
+    // console.log($(this))
+    // console.log("data attr: " + $(this).attr("data-ingredientText"));
+    event.preventDefault();
 
+    var shoppingItem = $(this).attr("data-ingredientText");
 
-// solved this issue by switching button type
-// $("#form-control").on("submit", function {
-         
-    // $('input#submit').trigger("click"); 
-//     $(".fas fa-search fa-3x").trigger("click");
+    // var newItem = {
+    //     name: shoppingItem
+    // }
 
-// });
+    shoppingList.push(shoppingItem);
+    renderShoppingList();
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+})
 
-
-
+$(document).on("click", ".delete", function () {
+    var index = $(this).attr("data-index");
+    shoppingList.splice(index, 1);
+    renderShoppingList();
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+})

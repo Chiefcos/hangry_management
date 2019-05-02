@@ -4,6 +4,14 @@
     font-weight: 100;
     font-family: "Lato";}
 
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
 #navbarSupportedContent {
     color: #FCFDFE;
     font-size: 1.0rem;
@@ -11,20 +19,34 @@
     font-family: "Poppins";
 }
 
-#searchForm {
+/* min-width */
+
+/* do not size search form because it is tied to the advanced search filter */
+#search-bar {
 	position:absolute;
     top:40%;
+    margin-left: 30%;
+    margin-right: auto;
     font-family: "Poppins";
+    width: 460px;
 }
 
-#advSearchCheckBox {
-    position:absolute;
-    top:50%;
-    margin-top:2%;
-    margin-left:2%;
-    color: #FCFDFE;
+.form-group {
+    margin-left: 30%;
+    margin-right: auto;
+}
+
+#all-results {
+    position: absolute;;
+    top:60%;
+    margin-left: auto;
+    margin-right: auto;
     font-family: "Poppins";
-    font-size: 1.0rem;
+    width: 80%;
+}
+
+#recipe-results {
+    width:100%;
 }
 
 
@@ -33,4 +55,18 @@
     font-size: 1.0rem;
     font-weight: 100;
     font-family: "Poppins";
+
+    padding: 50px;
 }
+
+/* Carousel card opacity adjustment -JKM */
+.carousel-item {
+    opacity: 0.75;
+}
+
+#adv-search-button {
+    margin-top: 5px;
+    text-align: center;
+    margin-left: 10px;
+}
+
