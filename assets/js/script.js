@@ -2,11 +2,11 @@
 //       window.scrollTo(00,00);
 // };
 
-$(document).ready(function scrollReset(){
-    window.scrollTo(00,00);
-});
+// $(document).ready(function scrollReset(){
+//     window.scrollTo(00,00);
+// });
 
-scrollReset();
+// scrollReset();
 
 var recipeDiv;
 

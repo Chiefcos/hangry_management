@@ -43,7 +43,8 @@ body {
 /* NOTE: do not re-size .search-form because it is tied to the advanced search filter */
 #search-bar {
 	position:absolute;
-    top:40%;
+    top:43%;
+    /* left: 33%; */
     margin-left: 33%;
     margin-right: 33%;
     font-family: "Poppins";
