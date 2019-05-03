@@ -17,7 +17,8 @@
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <title>Projet1 - Home</title>
+  <title>hANGER management - Home</title>
+  <link rel="icon" href="assets/hANGER-logo.jpg" type="image/gif" sizes="32x32">
 
 </head>
 
@@ -26,7 +27,7 @@
     <!-- Top Nav -->
     <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
       <div class="container col-xs-12 col-sm-12 nav-bar-container">
-        <a class="navbar-brand" href="#">HANGRY</a>
+        <a class="navbar-brand" href="#">h<b id="red">ANGER</b> management</a>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -55,26 +56,26 @@
   <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active" data-interval="10000">
-        <img srcset="http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=1 1x,
-             http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=2 2x,
-             http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=3 3x"
-        src="http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance"
+        <img srcset="http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=1 1x,
+        http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=2 2x,
+        http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=3 3x"
+        src="http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance"
         sizes="100vw">
         </div>
         <div class="carousel-item" data-interval="3000">
-          <img srcset="http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=1 1x,
-          http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=2 2x,
-          http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=3 3x"
-        src="http://pkelliher.imgix.net/donuts.jpg?fit=crop&h=784&w=1800&auto=enhance"
-        sizes="100vw"/>
+          <img srcset="http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=1 1x,
+          http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=2 2x,
+          http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=3 3x"
+          src="http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance"
+          sizes="100vw"/>
         </div>
         <div class="carousel-item">
-          <img srcset="http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=1 1x,
-             http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=2 2x,
-             http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=3 3x"
-        src="http://pkelliher.imgix.net/strawberries.jpg?fit=crop&h=784&w=1800&auto=enhance"
-        sizes="100vw"/>
-         </div>
+          <img srcset="http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=1 1x,
+          http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=2 2x,
+          http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance&dpr=3 3x"
+          src="http://pkelliher.imgix.net/coli.jpg?fit=crop&h=784&w=1800&auto=enhance"
+          sizes="100vw"/>
+        </div>
       </div>
 
       <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
@@ -91,10 +92,8 @@
   <form class="search-form">
     <div class="form-group" id="search-bar">
       <div class="input-group input-group-lg center-block">
-        <!-- <input type="text" class="form-control" placeholder="Try searching 'ketogenic' or 'chicken'!" id="ingredient"> -->
-        <input type="text" placeholder="Try searching 'ketogenic' or 'chicken'!" class="form-control ingredient">
-        <!-- I edited the placeholder text here. Please feel free to edit it back! -JKM -->
-        
+        <input type="text" placeholder="Try searching 'keto-friendly' or 'chicken'!" class="form-control ingredient">
+                
         <button type="submit" class="btn btn-link" value="input">
         <span class="input-group-addon"><i class="fas fa-search fa-2x"></i></span>
         </button>
@@ -102,7 +101,7 @@
       </div>
     
       <!-- Advanced search trigger Button modal -->
-      <button type="button" class="btn btn-outline-dark btn-sm" id="adv-search-button" data-toggle="modal" data-target="#advSearchMod">
+      <button type="button" class="btn btn-outline-danger btn-sm" id="adv-search-button" data-toggle="modal" data-target="#advSearchMod">
       Advanced Search Options
       </button>
 
@@ -153,11 +152,6 @@
 
   </div>
 
-    <!-- I commented this out because I moved this to the div above -JKM -->
-    <!-- Advanced search trigger Button modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#singleRecipeMod">
-    Advanced Search Options
-    </button> -->
 
   <!-- Modal for filters-->
   <div class="modal fade" id="advSearchMod" tabindex="-1" role="dialog" aria-labelledby="advSearchModTitle" aria-hidden="true">
@@ -165,7 +159,7 @@
         <div class="modal-content">
         
           <div class="modal-header">
-          <h5 class="modal-title" id="advSearchModTitle">Advanced Search</h5>
+          <h5 class="modal-title" id="advSearchModTitle">Advanced Search Options</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
@@ -176,7 +170,6 @@
                   Enter one search ingredient:<br>
                   <input type="text" class="ingredient"><br>
         
-                  <!-- <button type="submit">Search</button><br> -->
                   <br>
                   Calories:<br>
                   <input type="number" class="calories"> max calories per serving<br>
@@ -229,7 +222,6 @@
 
                   
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Search with Filter</button>
               </div>
 
@@ -241,11 +233,7 @@
               
               
             </div>
-<!-- 
-          <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Search with Filter</button>
-          </div> -->
+
 
         </div>
       </div>
@@ -253,16 +241,8 @@
   </div>
 
   <!-- Bottom Nav -->          
-  <div class="d-flex justify-content-center navbar-dark bg-dark" id="bottomNav">
-    <div class="p-2 bd-highlight">Terms</div>
-    <div class="d-flex align-items-center">|</div>
-    <div class="p-2 bd-highlight">Privacy</div>
-    <div class="d-flex align-items-center">|</div>
-    <div class="p-2 bd-highlight">About</div>
-    <div class="d-flex align-items-center">|</div>
-    <div class="p-2 bd-highlight">Contact</div>
-    <div class="d-flex align-items-center">|</div>
-    <div class="p-2 bd-highlight">Careers</div>
+  <div class="d-flex justify-content-center navbar-dark fixed-bottom bg-dark" id="bottomNav">
+    <div class="p-2 bd-highlight">h<b id="red">ANGER</b> management © 2019</div>
   </div>
         
     <!-- I commented this out because I moved this to above -JKM -->

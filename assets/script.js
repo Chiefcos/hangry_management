@@ -1,8 +1,14 @@
+// function scrollReset() {
+//       window.scrollTo(00,00);
+// };
+
+// scrollReset();
 
 var recipeDiv;
 
 $(".search-form").on("submit", function (event) {
     console.log("testing submit button");
+    $("#advSearchMod").modal('hide');
 
     event.preventDefault();
     $("#recipe-results").html("");
@@ -28,13 +34,6 @@ $(".search-form").on("submit", function (event) {
         healthArray.push($(this).val());
         healthString = "&healthLabels=" + healthArray.join("&healthLabels=");
     });
-
-    // var cuisineArray=[];
-    // var cuisineString = "";
-    // $.each($(".cuisine:checked"), function() {
-    //     cuisineArray.push($(this).val());
-    //     cuisineString = "&cuisine=" + cuisineArray.join("&cuisine=")
-    // }) 
 
     //excluded can have multiple responses separated by a space
     var excludedArray=[];
@@ -130,9 +129,9 @@ $(".search-form").on("submit", function (event) {
             recipeDiv.attr("data-linkToInstructions", linkToInstructions);
             recipeDiv.attr("data-image", response.hits[i].recipe.image);
 
+            // This will now tie the dynamically generated div to trigger the modal!
             recipeDiv.attr("data-toggle", "modal");
             recipeDiv.attr("data-target", "#singleRecipeMod");  
-            // data-toggle="modal" data-target="#singleRecipeMod"
             
 
             var title = $("<p>").text("Title: " + recipeTitle);
@@ -143,7 +142,14 @@ $(".search-form").on("submit", function (event) {
             recipeDiv.append(title);
             recipeDiv.append(arrayOfIngredients);
             recipeDiv.append(displayCaloriesPerServing);
-
+            
+            // test for forcing browser to scroll down
+            // function scrollDown() {
+            //   window.scrollBy(0, 200);
+            // }
+            // scrollDown();
+            
+            
             $("#recipe-results").append(recipeDiv);
             
         };
