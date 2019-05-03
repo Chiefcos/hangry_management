@@ -1,25 +1,22 @@
-/* colors the 'ANGER' in 'hANGER' red */
-#red {
-    color:red;
-}
-
-/* black background with transparent carousel makes for a black tint over page */
+/* Backgroud image styling below */
 body {
+    /* black background behind a transparent carousel creates a 'dark tint' look over page */
     background-color:black;
 }
 
 .carousel-item {
     opacity: 0.75;
+    position: fixed;
 }
 
 
+/* Navbar styling below */
 #mainNavbar .navbar-brand {
     color: white;
     font-size: 2.5rem;
     font-weight: 100;
-    font-family: "Lato";}
-
-
+    font-family: "Lato";
+}
 
 #navbarSupportedContent {
     color: #FCFDFE;
@@ -28,13 +25,25 @@ body {
     font-family: "Poppins";
 }
 
+#red {
+    /* colors the 'ANGER' in 'hANGER' red */
+    color:red;
+}
 
-/* do not re-size .search-form because it is tied to the advanced search filter */
+#bottomNav {
+    color: #FCFDFE;
+    font-size: 1.0rem;
+    font-weight: 100;
+    font-family: "Poppins";
+    padding: 20px;
+}
 
 
+/* Search and input form styling below */
+/* NOTE: do not re-size .search-form because it is tied to the advanced search filter */
 #search-bar {
 	position:absolute;
-    top:30%;
+    top:40%;
     margin-left: 33%;
     margin-right: 33%;
     font-family: "Poppins";
@@ -42,31 +51,31 @@ body {
     /* min-width to prevent crushing in when browser width is resized*/
 }
 
-
 .form-group {
     margin-left: 30%;
     margin-right: auto;
 }
 
 
-/* prevents magnifying glass icon from turning blue, like a hyperlink */
+/* Buttons styling below */
 .fa-search {
+    /* prevents magnifying glass icon from turning blue, like a hyperlink */
     color:black;
 }
 
-
-
 #adv-search-button {
     margin-top: 5px;
-    text-align: center;
     margin-left: 10px;
+}
+
+.btn-outline-danger {
     border-color: white;
     color:white;
     background-color:#212529;
     opacity: 0.75;
 }
 
-#adv-search-button:hover {
+.btn-outline-danger:hover {
     background-color:red;
     color:white;
     border-color: white;
@@ -74,6 +83,7 @@ body {
 }
 
 
+/* Search result displaying div styling below */
 #all-results {
     position: absolute;;
     top:100%;
@@ -82,42 +92,16 @@ body {
     /* margin-left: auto;
     margin-right: auto; */
     font-family: "Poppins";
-    min-width: 80%;
-    
+    min-width: 80%; 
 }
 
 #recipe-results {
     width:100%;
     /* background-color: #212529; */
-    opacity: 0.75;
-
 }
 
-
-
-.fixed-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-
-.fixed-bottom {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 1031;
-}
-
-#bottomNav {
-    color: #FCFDFE;
-    font-size: 1.0rem;
-    font-weight: 100;
-    font-family: "Poppins";
-
-    padding: 20px;
+.recipe-click {
+    border-color: white;
 }
 
 

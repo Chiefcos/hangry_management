@@ -2,12 +2,18 @@
 //       window.scrollTo(00,00);
 // };
 
-// scrollReset();
+$(document).ready(function scrollReset(){
+    window.scrollTo(00,00);
+});
+
+scrollReset();
 
 var recipeDiv;
 
 $(".search-form").on("submit", function (event) {
     console.log("testing submit button");
+
+    // this automatically closes the advanced search modal window when the user submits
     $("#advSearchMod").modal('hide');
 
     event.preventDefault();
@@ -129,7 +135,7 @@ $(".search-form").on("submit", function (event) {
             recipeDiv.attr("data-linkToInstructions", linkToInstructions);
             recipeDiv.attr("data-image", response.hits[i].recipe.image);
 
-            // This will now tie the dynamically generated div to trigger the modal!
+            // This will now tie the dynamically generated div to trigger the modal. -JKM
             recipeDiv.attr("data-toggle", "modal");
             recipeDiv.attr("data-target", "#singleRecipeMod");  
             
@@ -144,10 +150,12 @@ $(".search-form").on("submit", function (event) {
             recipeDiv.append(displayCaloriesPerServing);
             
             // test for forcing browser to scroll down
-            // function scrollDown() {
-            //   window.scrollBy(0, 200);
-            // }
-            // scrollDown();
+            function scrollDown() {
+              window.scrollTo(0, 900);
+                // $(this).scrollIntoView("#recipe-results");
+                // $(this)[0].scrollIntoView();
+            }
+            scrollDown();
             
             
             $("#recipe-results").append(recipeDiv);
@@ -157,7 +165,6 @@ $(".search-form").on("submit", function (event) {
 
     });
     
-    // });
 
     this.reset();
 
