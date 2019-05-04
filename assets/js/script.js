@@ -199,28 +199,32 @@ $(".search-form").on("submit", function(event) {
 });
 
 // back-to-top button js
-window.onscroll = function() {showBackTopBtn()};
+window.onscroll = function() {
+  showBackTopBtn();
+};
 
 function showBackTopBtn() {
-// this reveals the "back-to-top" button only when the window has scrolled down by 600px or more
-  if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+  // this reveals the "back-to-top" button only when the window has scrolled down by 600px or more
+  if (
+    document.body.scrollTop > 600 ||
+    document.documentElement.scrollTop > 600
+  ) {
     $("#back-to-top").css("display", "block");
-  } 
-  else {
+  } else {
     $("#back-to-top").css("display", "none");
-  };
+  }
 }
 
 $("#back-to-top").on("click", function() {
-    scrollToTop();
+  scrollToTop();
 });
 
 // When the user clicks on the button, scroll to the top of the document
 function scrollToTop() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-};
-
+}
+var recipeArray = [];
 $(document).on("click", ".recipe-click", function() {
   // Firebase Click Counter
   // =============================================================================================
@@ -253,7 +257,6 @@ $(document).on("click", ".recipe-click", function() {
   database.ref().push({
     recipe: [recipeName, clickCounter]
   });
-  database.ref().on();
   // ===============================================================================================
 
   var recipeTitle = $(this).attr("data-title");
