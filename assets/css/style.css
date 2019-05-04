@@ -1,109 +1,159 @@
 /* Backgroud image styling below */
 body {
-    /* black background behind a transparent carousel creates a 'dark tint' look over page */
-    background-color:black;
+  /* black background behind a transparent carousel creates a 'dark tint' look over page */
+  background-color: black;
 }
 
 .carousel-item {
-    opacity: 0.75;
-    position: fixed;
+  opacity: 0.75;
+  position: fixed;
 }
-
 
 /* Navbar styling below */
 #mainNavbar .navbar-brand {
-    color: white;
-    font-size: 2.5rem;
-    font-weight: 100;
-    font-family: "Lato";
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 100;
+  font-family: "Lato";
 }
 
 #navbarSupportedContent {
-    color: #FCFDFE;
-    font-size: 1.0rem;
-    font-weight: 100;
-    font-family: "Poppins";
+  color: #fcfdfe;
+  font-size: 1rem;
+  font-weight: 100;
+  font-family: "Poppins";
 }
 
 #red {
-    /* colors the 'ANGER' in 'hANGER' red */
-    color:red;
+  /* colors the 'ANGER' in 'hANGER' red */
+  color: red;
 }
 
 #bottomNav {
-    color: #FCFDFE;
-    font-size: 1.0rem;
-    font-weight: 100;
-    font-family: "Poppins";
-    padding: 20px;
+  color: #fcfdfe;
+  font-size: 1rem;
+  font-weight: 100;
+  font-family: "Poppins";
+  padding: 20px;
 }
-
 
 /* Search and input form styling below */
 /* NOTE: do not re-size .search-form because it is tied to the advanced search filter */
 #search-bar {
-	position:absolute;
-    top:43%;
-    /* left: 33%; */
-    margin-left: 33%;
-    margin-right: 33%;
-    font-family: "Poppins";
-    min-width: 485px;
-    /* min-width to prevent crushing in when browser width is resized*/
+  position: absolute;
+  top: 43%;
+  /* left: 33%; */
+  margin-left: 33%;
+  margin-right: 33%;
+  font-family: "Poppins";
+  min-width: 485px;
+  /* min-width to prevent crushing in when browser width is resized*/
 }
 
 .form-group {
-    margin-left: 30%;
-    margin-right: auto;
+  margin-left: 30%;
+  margin-right: auto;
 }
-
 
 /* Buttons styling below */
 .fa-search {
-    /* prevents magnifying glass icon from turning blue, like a hyperlink */
-    color:black;
+  /* prevents magnifying glass icon from turning blue, like a hyperlink */
+  color: black;
 }
 
 #adv-search-button {
-    margin-top: 5px;
-    margin-left: 10px;
+  margin-top: 5px;
+  margin-left: 10px;
 }
 
 .btn-outline-danger {
-    border-color: white;
-    color:white;
-    background-color:#212529;
-    opacity: 0.75;
+  border-color: white;
+  color: white;
+  background-color: #212529;
+  opacity: 0.75;
 }
 
 .btn-outline-danger:hover {
-    background-color:red;
-    color:white;
-    border-color: white;
-    opacity: 1.0;
+  background-color: red;
+  color: white;
+  border-color: white;
+  opacity: 1;
 }
-
 
 /* Search result displaying div styling below */
 #all-results {
-    position: absolute;;
-    top:100%;
-    left:10%;
-    right:10%;
-    /* margin-left: auto;
+  position: absolute;
+  top: 100%;
+  left: 10%;
+  right: 10%;
+  /* margin-left: auto;
     margin-right: auto; */
-    font-family: "Poppins";
-    min-width: 80%; 
+  font-family: "Poppins";
+  min-width: 80%;
 }
 
 #recipe-results {
-    width:100%;
-    /* background-color: #212529; */
+  width: 100%;
+  /* background-color: #212529; */
 }
 
 .recipe-click {
-    border-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: auto;
+  margin: 5%;
+  background: rgba(33, 37, 41, 0.8);
+  background-size: contain;
+}
+.image-background {
+  background-size: cover;
+  background-position-y: center;
+  margin: 2%;
+  border-radius: 5%;
+  border: 1px solid white;
 }
 
+.article {
+  margin: 2%;
+  border-radius: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  color: white;
+}
+.modal-image {
+  height: 200px;
+  border-radius: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
+.modal-body {
+  background: ;
+}
 
+#add-to-shopping {
+  font-size: 10px;
+}
+
+#recipe-bookmark {
+  background: rgba(33, 37, 41, 0.8);
+  position: absolute;
+  border-radius: 7%;
+  top: 40%;
+  left: 85%;
+  color: white;
+  padding: 1%;
+  z-index: 3;
+}
+
+#bookmark-list {
+  margin-top: 20%;
+  z-index: 2;
+}
+
+.hide {
+  display: hide;
+}
+.delete {
+  z-index: 1;
+}

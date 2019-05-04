@@ -1,5 +1,9 @@
 var recipeDiv;
 
+if ($(".form-control ingredient").val() === "") {
+  alert("type in something in the search field");
+}
+
 $("#search-form").on("submit", function(event) {
   event.preventDefault();
   $("#recipe-results").html("");

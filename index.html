@@ -97,11 +97,17 @@
 
   </div>
     
+
+  <!-- Recipe Bookmark -->
+  <div id="recipe-bookmark" class="text-center">
+    Recipe Bookmark
+    <div id="bookmark-list"  class="col-md-12">placeholder</div>
+  </div>
   <!-- Main Search Bar -->
   <form class="search-form">
     <div class="form-group" id="search-bar">
       <div class="input-group input-group-lg center-block">
-        <input type="text" placeholder="Try searching 'keto-friendly' or 'chicken'!" class="form-control ingredient">
+        <input id="ingredient-1" type="text" placeholder="Try searching 'keto-friendly' or 'chicken'!" class="form-control ingredient">
                 
         <button type="submit" class="btn btn-link" value="input">
         <span class="input-group-addon"><i class="fas fa-search fa-2x"></i></span>
@@ -129,8 +135,8 @@
       
       <div class="modal-header">
         <h5 class="modal-title" id="singleRecipeModTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="close closed" data-dismiss="modal" aria-label="Close">
+          <span class="close" aria-hidden="true">&times;</span>
         </button>
       </div>
 
@@ -142,7 +148,7 @@
       </div>
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary closed" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
 
@@ -152,7 +158,7 @@
           
   <div id="all-results">  
     
-    <div id="recipe-results">Results placeholder</div>
+    <div id="recipe-results" class="container">Results placeholder</div>
 
     <br>
     
@@ -181,7 +187,7 @@
       <div class="modal-body">
         <form class="search-form">
           <p>Enter one search ingredient:<br>
-          <input type="text" class="ingredient"><br>
+          <input id="ingredient-2" type="text" class="ingredient"><br>
           </p>
 
           <p>
@@ -246,7 +252,7 @@
                           
           <!-- modal footer intentionally placed inside form tags -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Search with Filter</button>
+            <button type="submit" class="btn btn-primary search-form">Search with Filter</button>
           </div>
 
         </form>
