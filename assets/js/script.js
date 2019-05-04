@@ -14,7 +14,7 @@ $(".search-form").on("submit", function(event) {
     .trim();
 
   if (advSearchBar === "" && mainSearchBar === "") {
-    alert("bla bla bla");
+    alert("Please enter a keyword!");
     return;
   }
   // this automatically closes the advanced search modal window when the user submits
@@ -185,7 +185,7 @@ $(".search-form").on("submit", function(event) {
 
       // test for forcing browser to scroll down
       function scrollDown() {
-        window.scrollTo(0, 750);
+        window.scrollTo(0, 800);
         // $(this).scrollIntoView("#recipe-results");
         // $(this)[0].scrollIntoView();
       }
@@ -197,6 +197,29 @@ $(".search-form").on("submit", function(event) {
 
   this.reset();
 });
+
+// back-to-top button js
+window.onscroll = function() {showBackTopBtn()};
+
+function showBackTopBtn() {
+// this reveals the "back-to-top" button only when the window has scrolled down by 600px or more
+  if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+    $("#back-to-top").css("display", "block");
+  } 
+  else {
+    $("#back-to-top").css("display", "none");
+  };
+}
+
+$("#back-to-top").on("click", function() {
+    scrollToTop();
+});
+
+// When the user clicks on the button, scroll to the top of the document
+function scrollToTop() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+};
 
 $(document).on("click", ".recipe-click", function() {
   // Firebase Click Counter
@@ -288,11 +311,13 @@ $(document).on("click", ".recipe-click", function() {
     divPlayer = $("<div>");
     divPlayer.attr("id", "player");
 
-    $(".modal-body").append(divPlayer);
+    $("#single-display-modal").append(divPlayer);
   });
 
   // =============================================================================
-  $("#single-recipe").html("");
+  // $("#single-recipe").html("");
+  $("#singleRecipeModTitle").html("");
+
   var singleRecipeDiv = $("<div>");
   singleRecipeDiv.addClass("container");
   singleRecipeDiv.attr("id", "removal");
@@ -356,7 +381,7 @@ $(document).on("click", ".recipe-click", function() {
   singleRecipeDiv.append(singleRecipetotalNutrients);
   singleRecipeDiv.append(singleRecipeLinkToInstructions);
 
-  $(".modal-body").append(singleRecipeDiv);
+  $("#single-display-modal").append(singleRecipeDiv);
 
   $("#singleRecipeModTitle").text($(this).attr("data-title"));
   // console.log("ingredients to favorite: " + ingredientsToFavorite);

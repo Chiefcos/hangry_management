@@ -80,6 +80,20 @@ body {
   opacity: 1;
 }
 
+.btn-light:hover {
+  background-color: white;
+  color: black;
+}
+
+#back-to-top {
+  display: none; 
+  position: fixed;
+  bottom: 100px;
+  right: 25px; 
+  z-index: 99; 
+}
+
+
 /* Search result displaying div styling below */
 #all-results {
   position: absolute;

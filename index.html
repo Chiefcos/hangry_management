@@ -34,7 +34,7 @@
         </button>
 
         <!-- Hamburger Nav -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
             <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
@@ -46,14 +46,8 @@
             <a class="nav-link" href="#">Dietary Lifestyle Glossary</a>
             </li>
           </ul>
-        </div>
+        </div> -->
         
-        <!-- Inline Search Bar -->
-        <!-- <form class="form-inline search-form">
-            <input class="form-control mr-sm-2 ingredient" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-
       </div>
     </nav>
   </header>
@@ -122,6 +116,10 @@
     </div>
   </form>
 
+  
+  <!-- Back-to-Top Button -->
+  <button class="btn btn-outline-danger" id="back-to-top" title="Go to top">&#9650; Back to Top</button>
+
 
   <!-- SINGLE RECIPE DIV AS A BUTTON trigger modal // commented out just for my ref // do not use-->
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#singleRecipeMod">
@@ -131,7 +129,7 @@
   <!-- Single recipe display modal -->
   <div class="modal fade" id="singleRecipeMod" tabindex="-1" role="dialog" aria-labelledby="singleRecipeModTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content bg-light">
       
       <div class="modal-header">
         <h5 class="modal-title" id="singleRecipeModTitle">Modal title</h5>
@@ -140,7 +138,7 @@
         </button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body" id="single-display-modal">
         ...
         <!-- YouTube player div for Luc - JKM -->
         <div id="player">YouTube Video Placeholder</div>
@@ -149,7 +147,7 @@
       
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary closed" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-outline-danger search-form">Save changes</button>
       </div>
 
     </div>
@@ -158,24 +156,15 @@
           
   <div id="all-results">  
     
-    <div id="recipe-results" class="container">Results placeholder</div>
-
-    <br>
-    
-    <div id="single-recipe">Single Recipe Modal placeholder</div>
-    <div id="player"></div>
-
-    <br>
-    
-    <div id="shopping-list">Shopping list placeholder</div>
-
+    <div id="recipe-results" class="container"></div>
+    <!-- <div id="shopping-list">Shopping list placeholder</div> -->
   </div>
 
 
   <!-- Modal for filters-->
   <div class="modal fade" id="advSearchMod" tabindex="-1" role="dialog" aria-labelledby="advSearchModTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content bg-light">
         
       <div class="modal-header">
       <h5 class="modal-title" id="advSearchModTitle">Advanced Search Options</h5>
@@ -201,7 +190,7 @@
           </p>
 
           <p>
-          <a class="btn btn-light" data-toggle="collapse" href="#dietCollapse" role="button" aria-expanded="false" aria-controls="dietCollapse">&#9660; Diet:</a><br> 
+          <a class="btn btn-light btn-outline-dark" data-toggle="collapse" href="#dietCollapse" role="button" aria-expanded="false" aria-controls="dietCollapse">&#9660; Diet:</a><br> 
           <div class="collapse" id="dietCollapse">
             <div class="card card-body">
               Choose One<br>
@@ -215,7 +204,7 @@
           </p>
 
           <p>
-          <a class="btn btn-light" data-toggle="collapse" href="#healthCollapse" role="button" aria-expanded="false" aria-controls="healthCollapse">&#9660; Health:</a><br> 
+          <a class="btn btn-light btn-outline-dark" data-toggle="collapse" href="#healthCollapse" role="button" aria-expanded="false" aria-controls="healthCollapse">&#9660; Health:</a><br> 
           <div class="collapse" id="healthCollapse">
             <div class="card card-body">
               <input type="checkbox" class="health" value="Keto-Friendly">NOKeto-Friendly<br> 
@@ -252,7 +241,7 @@
                           
           <!-- modal footer intentionally placed inside form tags -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary search-form">Search with Filter</button>
+            <button type="submit" class="btn btn-outline-danger search-form">Search with Filter</button>
           </div>
 
         </form>
